@@ -1,0 +1,693 @@
+import leon.collection._
+import leon.webDSL.webDescription._
+import leon.webDSL.webBuilding._
+import implicits._
+import scala.language.dynamics
+import leon.lang._
+
+object FaforeverUnits {
+  val css = Style(
+    
+    "@fontFace" := (
+      ^.fontFamily := "'Black Ops One'",
+      ^.css("font-style") := "normal",
+      ^.fontWeight := "400",
+      ^.css("src") := "local('Black Ops One'), local('BlackOpsOne-Regular'), url(http://fonts.gstatic.com/s/blackopsone/v7/2XW-DmDsGbDLE372KrMW1X1PgMwFt2V-WJ2uOZ4WXLU.woff2) format('woff2')",
+      ^.css("unicode-range") := "U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF"
+),
+    "@fontFace" := (
+      ^.fontFamily := "'Black Ops One'",
+      ^.css("font-style") := "normal",
+      ^.fontWeight := "400",
+      ^.css("src") := "local('Black Ops One'), local('BlackOpsOne-Regular'), url(http://fonts.gstatic.com/s/blackopsone/v7/2XW-DmDsGbDLE372KrMW1TxObtw73-qQgbr7Be51v5c.woff2) format('woff2')",
+      ^.css("unicode-range") := "U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000 -206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000" 
+),
+
+"body" := (
+	^.padding := "0 5px",
+	^.margin := "0"
+	),
+	
+"table" := (
+	^.css("emptyCells") := "show",
+	^.css("cursor") := "default"
+	),
+
+".logo_wrap" := (
+	^.css("width") := "150px",
+	^.css("margin") := "0 auto"
+	),
+
+".logo_aeon" := (
+	^.css("background-color") := "black",
+	^.css("background-image") := "url('http://www.faforever.com/faf/unitsDB/css/logo/aeon.png')",
+	^.css("background-repeat") := "noRepeat",
+	^.css("background-position") := "top center",
+	^.css("height") := "113px",
+	^.css("text-align") := "center"
+	),
+
+".logo_cybran" := (
+	^.css("background-color") := "black",
+	^.css("background-image") := "url('http://www.faforever.com/faf/unitsDB/css/logo/cybran.png')",
+	^.css("background-repeat") := "noRepeat",
+	^.css("background-position") := "top center",
+	^.css("height") := "113px",
+	^.css("text-align") := "center"
+	),
+
+".logo_uef" := (
+	^.css("background-color") := "black",
+	^.css("background-image") := "url('http://www.faforever.com/faf/unitsDB/css/logo/uef.png')",
+	^.css("background-repeat") := "noRepeat",
+	^.css("background-position") := "top center",
+	^.css("height") := "113px",
+	^.css("text-align") := "center"
+	),
+	
+".logo_seraphim" := (
+	^.css("background-color") := "black",
+	^.css("background-image") := "url('http://www.faforever.com/faf/unitsDB/css/logo/seraphim.png')",
+	^.css("background-repeat") := "noRepeat",
+	^.css("background-position") := "top center",
+	^.css("height") := "113px",
+	^.css("text-align") := "center"
+	),
+
+".logo_text" := (
+	^.css("position") := "relative",
+	^.css("top") := "65%",
+	^.css("color") := "white",
+	^.css("font-family") := "'Black Ops One', cursive",
+	^.css("font-size") := "25"
+	),
+
+"td.Aeon" := (
+	^.css("border-left") := "1px solid #006600",
+	^.css("background-color") := "rgb(189, 235, 173)"
+	),
+
+".Aeon#hborder" := (
+	^.css("border-top") := "1px solid #006600"
+	),
+
+".Aeon i" := (
+	^.css("color") := "#006600"
+	),
+	
+"td.Cybran" := (
+	^.css("border-left") := "1px solid #960018",
+	^.css("background-color") := "rgb(255, 122, 122)"
+	),
+
+".Cybran#hborder" := (
+	^.css("border-top") := "1px solid #960018"
+	),
+	
+".Cybran i" := (
+	^.css("color") := "#960018"
+	),
+	
+"td.UEF" := (
+	^.css("border-left") := "1px solid #0066cc",
+	^.css("background-color") := "rgb(107, 221, 255)"
+	),
+	
+".UEF#hborder" := (
+	^.css("border-top") := "1px solid #0066cc"
+	),
+
+".UEF i" := (
+	^.css("color") := "#0033ff"
+	),
+
+"td.Seraphim" := (
+	^.css("border-left") := "1px solid #cc9933",
+	^.css("border-right") := "1px solid #cc9933",
+	^.css("background-color") := "rgb(255, 215, 125)"
+	),
+	
+".Seraphim#hborder" := (
+	^.css("border-top") := "1px solid #cc9933"
+	),
+	
+".Seraphim i" := (
+	^.css("color") := "#cc6633"
+	),
+
+".Category" := (
+	^.css("background-color") := "#000",
+	^.css("color") := "#fff",
+	^.css("font-weight") := "bold"
+	),
+	
+".wrapper" := (
+	^.css("float") := "left",
+	^.css("height") := "20px"
+	),
+
+"#unit" := (
+	^.css("padding-left") := "2px",
+	^.css("height") := "100%",
+	^.css("width") := "100%",
+	^.css("float") := "left"
+	),
+
+"#checkbox" := (
+	^.css("height") := "5px",
+	^.css("float") := "right",
+	^.css("display") := "none"
+	),
+
+"#T2, #T3, #T4" := (
+	^.css("border-top") := "1px dotted gray"
+	)
+    
+
+    //".hiddenAcc" := (
+      //  ^.display:= "block",
+      //  ^.position:= "absolute",
+      //  ^.top:= "-999em"
+
+   // """.form-control, textarea, select, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input""" := ( 
+    //^.height := "30px",
+    //^.paddingTop := "4px",
+    //^.paddingBottom := "4px",
+    //^.borderRadius := "0",
+    //^.borderColor := "#b7b7b7",
+    //^.fontSize := "13px"
+    
+    //".textPoll th, .textPoll .foot td" := (
+    //    ^.maxWidth:= "94px"
+    //),
+    //"label" := (
+    //    ^.fontWeight:= "normal"
+    //),
+    //"label" := (
+    //    ^.display:= "inline-block",
+    //    ^.marginBottom:= "5px",
+    //    ^.fontWeight:= "bold"
+    //),
+    //"table.poll tr.participation td" := (
+    //  ^.textAlign:= "center",
+    //  ^.backgroundColor:= "#eaeaea"
+    //),
+    //"table.poll tr.participant td.n" := (
+    //  ^.backgroundColor := "#ffccca"
+    //),
+    //"table.poll tr.participant td.y" := (
+    //  ^.backgroundColor := "#d1f3d1"
+    //),
+    //"table.poll tr.participant td" := (
+    //  ^.textAlign:= "center",
+    //  ^.verticalAlign:= "middle",
+    //  ^.height:= "33px"
+    //)
+    )
+    
+    val center = Element("center", Nil(), Nil(), Nil        ())
+    
+    val page = <.table(
+      <.tbody(
+      <.tr(
+        <.td(
+          <.div(^.classes := "logo_aeon",
+          <.div(^.classes := "logo_text", "Aeon"))),
+        <.td(
+          <.div(^.classes := "logo_cybran",
+          <.div(^.classes := "logo_text", "Cybran"))),
+        <.td(
+          <.div(^.classes := "logo_uef",
+          <.div(^.classes := "logo_text", "UEF"))),
+        <.td(
+          <.div(^.classes := "logo_seraphim",
+          <.div(^.classes := "logo_text", "Seraphim")))),
+      <.tr(
+        <.td(^.id := "Aeon", ^.classes := "hborder",            ^.height := "5"),
+        <.td(^.id := "Cybran", ^.classes := "hborder"           ),
+        <.td(^.id := "UEF", ^.classes := "hborder"),
+        <.td(^.id := "Seraphim", ^.classes :=                   "hborder")),
+      <.tr(
+        <.td(^.classes := "Category", ^("colSpan") := "4",
+            center("Command"))),
+          
+      <.tr(
+        <.td(^.id := "T0", ^.classes := "Aeon", 
+        ^("valign") := "top",
+          <.table(^.id := "Aeon", ^.classes := "unit",             ^.backgroundColor := "transparent",                  ^.cellspacing := "0", ^.width :=                       "100%",
+            <.tbody(
+              <.tr(
+                <.td(^.width := "20",
+                  <.img(^.classes := "icon", ^.src :=                    "http://www.faforever.com/faf/unitsDB/icons/small/aeon_icon_commander_generic.png", ^.alt := "UAL0001")),
+                <.td(^.id := "UAL0001", ^.classes :=                   "content", "Armored Command Unit"),
+                <.td(^.width := "20",
+                  <.input(^.id := "checkbox",                             ^.display := "none", 
+                     ^.tpe := "checkbox")
+                    )
+                  )
+                )
+              )
+            ),
+        <.td(^.id := "T0", ^.classes := "Cybran", 
+        ^("valign") := "top",
+          <.table(^.id := "Cybran", ^.classes :=                 "unit", ^.backgroundColor := 
+            "transparent", ^.cellspacing := "0", 
+            ^.width := "100%",
+            <.tbody(
+              <.tr(
+                <.td(^.width := "20",
+                  <.img(^.classes := "icon", ^.src :=                    "http://www.faforever.com/faf/unitsDB/icons/small/cybran_icon_commander_generic.png", ^.alt := "URL0001")),
+                <.td(^.id := "URL0001", ^.classes :=                   "content", "Armored Command Unit"),
+                <.td(^.width := "20",
+                  <.input(^.id := "checkbox",                             ^.display := "none", 
+                     ^.tpe := "checkbox")
+                    )
+                  )
+                )
+              )
+            ),
+        <.td(^.id := "T0", ^.classes := "UEF",                 ^("valign") := "top",
+          <.table(^.id := "UEF", ^.classes :=                 "unit", ^.backgroundColor := 
+            "transparent", ^.cellspacing := "0", 
+            ^.width := "100%",
+              <.tbody(
+              <.tr(
+                <.td(^.width := "20",
+                  <.img(^.classes := "icon", ^.src :=                    "http://www.faforever.com/faf/unitsDB/icons/small/uef_icon_commander_generic.png", ^.alt := "UEL0001")),
+                    <.td(^.id := "UEL0001", ^.classes                       := "content", "Armored Command                       Unit"),
+                <.td(^.width := "20",
+                  <.input(^.id := "checkbox",                             ^.display := "none", 
+                     ^.tpe := "checkbox")
+                    )
+                  )
+                )
+              )
+            ),
+        <.td(^.id := "T0", ^.classes := "Seraphim",                 ^("valign") := "top",
+          <.table(^.id := "Seraphim", ^.classes :=                 "unit", ^.backgroundColor := 
+            "transparent", ^.cellspacing := "0", 
+            ^.width := "100%",
+              <.tbody(
+              <.tr(
+                <.td(^.width := "20",
+                  <.img(^.classes := "icon", ^.src :=                    "http://www.faforever.com/faf/unitsDB/icons/small/seraphim_icon_commander_generic.png", ^.alt := "XSL0001")),
+                    <.td(^.id := "XSL0001", ^.classes                       := "content", "Armored Command                       Unit"),
+                <.td(^.width := "20",
+                  <.input(^.id := "checkbox",                            ^.display := "none", 
+                    ^.tpe := "checkbox")
+                    )
+                  )
+                )
+              )
+            )
+          ),
+      <.tr(
+        <.td(^.id := "T3", ^.classes := "Aeon", 
+          ^("valign") := "top",
+          <.table(^.id := "Aeon", ^.classes := "unit"             , ^.backgroundColor := "transparent", ^              .cellspacing := "0", ^.width := "100%",
+            <.tbody(
+              <.tr(
+                <.td(^.width := "20",
+                  <.img(^.classes := "icon", ^.src :=                     "http://www.faforever.com/faf/unitsDB/icons/small/aeon_icon_commander_generic.png", ^.alt := "UAL0301")),
+                  <.td(^.id := "UAL0301", ^.classes                      := "content", "T3 Support Armored                     Command Unit"),
+                <.td(^.width := "20",
+                  <.input(^.id := "checkbox",
+                    ^.display := "none",
+                    ^.tpe := "checkbox")
+                    )
+                  )
+                )  
+              )
+            ),
+        <.td(^.id := "T3", ^.classes := "Cybran", 
+          ^("valign") := "top",
+          <.table(^.id := "Cybran", ^.classes :=                 "unit", ^.backgroundColor := "transparent",          ^.cellspacing := "0", ^.width := "100%",
+            <.tbody(
+              <.tr(
+                <.td(^.width := "20",
+                  <.img(^.classes := "icon", ^.src :=                     "http://www.faforever.com/faf/unitsDB/icons/small/cybran_icon_commander_generic.png", ^.alt := "URL0301")),
+                  <.td(^.id := "URL0301", ^.classes                      := "content", "T3 Support Armored                     Command Unit"),
+                <.td(^.width := "20",
+                  <.input(^.id := "checkbox",
+                    ^.display := "none",
+                    ^.tpe := "checkbox")
+                    )
+                  )
+                )  
+              )
+            ),
+        <.td(^.id := "T3", ^.classes := "UEF", 
+          ^("valign") := "top",
+          <.table(^.id := "UEF", ^.classes := "unit"             , ^.backgroundColor := "transparent", ^              .cellspacing := "0", ^.width := "100%",
+            <.tbody(
+              <.tr(
+                <.td(^.width := "20",
+                  <.img(^.classes := "icon", ^.src :=                     "http://www.faforever.com/faf/unitsDB/icons/small/uef_icon_commander_generic.png", ^.alt := "UEL0301")),
+                  <.td(^.id := "UEL0301", ^.classes                      := "content", "T3 Support Armored                     Command Unit"),
+                <.td(^.width := "20",
+                  <.input(^.id := "checkbox",
+                    ^.display := "none",
+                    ^.tpe := "checkbox")
+                    )
+                  )
+                )  
+              )
+            ),
+        <.td(^.id := "T3", ^.classes := "Seraphim", 
+          ^("valign") := "top",
+          <.table(^.id := "Seraphim", ^.classes :=             "unit", ^.backgroundColor := "transparent",           ^.cellspacing := "0", ^.width := "100%",
+            <.tbody(
+              <.tr(
+                <.td(^.width := "20",
+                  <.img(^.classes := "icon", ^.src :=                     "http://www.faforever.com/faf/unitsDB/icons/small/seraphim_icon_commander_generic.png", ^.alt :="XSL0301")),
+                  <.td(^.id := "XSL0301", ^.classes                      := "content", "T3 Support Armored                     Command Unit"),
+                <.td(^.width := "20",
+                  <.input(^.id := "checkbox",
+                    ^.display := "none",
+                    ^.tpe := "checkbox")
+                    )
+                  )
+                )  
+              )
+            )
+          ),
+      <.tr(
+        <.td(^.classes := "Category", ^("colSpan") := "4",
+            center("Engineer"))),
+      <.tr(
+        <.td(^.id := "T1", ^.classes := "Aeon", 
+        ^("valign") := "top",
+          <.table(^.id := "Aeon", ^.classes := "unit",             ^.backgroundColor := "transparent",                  ^.cellspacing := "0", ^.width :=                       "100%",
+            <.tbody(
+              <.tr(
+                <.td(^.width := "20",
+                  <.img(^.classes := "icon", ^.src :=                    "http://www.faforever.com/faf/unitsDB/icons/small/aeon_icon_land1_engineer.png", ^.alt := "UAL0105")),
+                <.td(^.id := "UAL0001", ^.classes :=                   "content", "T1 Engineer"),
+                <.td(^.width := "20",
+                  <.input(^.id := "checkbox",                             ^.display := "none", 
+                     ^.tpe := "checkbox")
+                    )
+                  )
+                )
+              )
+            ),
+        <.td(^.id := "T1", ^.classes := "Cybran", 
+        ^("valign") := "top",
+          <.table(^.id := "Cybran", ^.classes :=                 "unit", ^.backgroundColor := 
+            "transparent", ^.cellspacing := "0", 
+            ^.width := "100%",
+            <.tbody(
+              <.tr(
+                <.td(^.width := "20",
+                  <.img(^.classes := "icon", ^.src :=                    "http://www.faforever.com/faf/unitsDB/icons/small/cybran_icon_land1_engineer.png", ^.alt := "URL0105")),
+                <.td(^.id := "URL0105", ^.classes :=                   "content", "T1 Engineer"),
+                <.td(^.width := "20",
+                  <.input(^.id := "checkbox",                             ^.display := "none", 
+                     ^.tpe := "checkbox")
+                    )
+                  )
+                )
+              )
+            ),
+        <.td(^.id := "T1", ^.classes := "UEF",                 ^("valign") := "top",
+          <.table(^.id := "UEF", ^.classes :=                 "unit", ^.backgroundColor := 
+            "transparent", ^.cellspacing := "0", 
+            ^.width := "100%",
+              <.tbody(
+              <.tr(
+                <.td(^.width := "20",
+                  <.img(^.classes := "icon", ^.src :=                    "http://www.faforever.com/faf/unitsDB/icons/small/uef_icon_land1_engineer.png", ^.alt := "UEL0105")),
+                    <.td(^.id := "UEL0105", ^.classes                       := "content", "T1 Engineer"),
+                <.td(^.width := "20",
+                  <.input(^.id := "checkbox",                             ^.display := "none", 
+                     ^.tpe := "checkbox")
+                    )
+                  )
+                )
+              )
+            ),
+        <.td(^.id := "T1", ^.classes := "Seraphim", 
+          ^("valign") := "top",
+          <.table(^.id := "Seraphim", ^.classes :=             "unit", ^.backgroundColor := "transparent",           ^.cellspacing := "0", ^.width := "100%",
+            <.tbody(
+              <.tr(
+                <.td(^.width := "20",
+                  <.img(^.classes := "icon", ^.src :=                     "http://www.faforever.com/faf/unitsDB/icons/small/seraphim_icon_commander_generic.png", ^.alt :="XSL0105")),
+                  <.td(^.id := "XSL0105", ^.classes                      := "content", "T1 Engineer: ",
+                    <.i(
+                      <.b("Iya-istle"))),
+                <.td(^.width := "20",
+                  <.input(^.id := "checkbox",
+                    ^.display := "none",
+                    ^.tpe := "checkbox")
+                    )
+                  )
+                )  
+              )
+            )
+          ),
+      <.tr(
+        <.td(^.id := "T2", ^.classes := "Aeon", 
+        ^("valign") := "top",
+          <.table(^.id := "Aeon", ^.classes := "unit",             ^.backgroundColor := "transparent",                  ^.cellspacing := "0", ^.width :=                       "100%",
+            <.tbody(
+              <.tr(
+                <.td(^.width := "20",
+                  <.img(^.classes := "icon", ^.src :=                    "http://www.faforever.com/faf/unitsDB/icons/small/aeon_icon_land2_engineer.png", ^.alt := "UAL0208")),
+                <.td(^.id := "UAL0208", ^.classes :=                   "content", "T2 Engineer"),
+                <.td(^.width := "20",
+                  <.input(^.id := "checkbox",                             ^.display := "none", 
+                     ^.tpe := "checkbox")
+                    )
+                  )
+                )
+              )
+            ),
+        <.td(^.id := "T2", ^.classes := "Cybran", 
+        ^("valign") := "top",
+          <.table(^.id := "Cybran", ^.classes :=                 "unit", ^.backgroundColor := "transparent             ", ^.cellspacing := "0", ^.width :=                  "100%",
+            <.tbody(
+              <.tr(
+                <.td(^.width := "20",
+                  <.img(^.classes := "icon", ^.src :=                    "http://www.faforever.com/faf/unitsDB/icons/small/cybran_icon_structure2_engineer.png", ^.alt := "XRB0104")),
+                <.td(^.id := "XRB0104", ^.classes :=                   "content", "T2 Engineering Station:                   ",
+                  <.i(
+                      <.b("The Hive"))),
+                <.td(^.width := "20",
+                  <.input(^.id := "checkbox",                             ^.display := "none", 
+                     ^.tpe := "checkbox")
+                    )
+                  )
+                )
+              ),
+          <.table(^.id := "Cybran", ^.classes :=                 "unit", ^.backgroundColor := "transparent             ", ^.cellspacing := "0", ^.width :=                  "100%",
+            <.tbody(
+              <.tr(
+                <.td(^.width := "20",
+                  <.img(^.classes := "icon", ^.src :=                    "http://www.faforever.com/faf/unitsDB/icons/small/cybran_icon_structure2_engineer.png", ^.alt := "XRB0204")),
+                <.td(^.id := "XRB0204", ^.classes :=                   "content", "T2 Engineering Station:                   ",
+                  <.i(
+                      <.b("The Hive"))),
+                <.td(^.width := "20",
+                  <.input(^.id := "checkbox",                             ^.display := "none", 
+                     ^.tpe := "checkbox")
+                    )
+                  )
+                )
+              ),
+          <.table(^.id := "Cybran", ^.classes :=                 "unit", ^.backgroundColor := "transparent             ", ^.cellspacing := "0", ^.width :=                  "100%",
+            <.tbody(
+              <.tr(
+                <.td(^.width := "20",
+                  <.img(^.classes := "icon", ^.src :=                    "http://www.faforever.com/faf/unitsDB/icons/small/cybran_icon_structure2_engineer.png", ^.alt := "XRB0304")),
+                <.td(^.id := "XRB0304", ^.classes :=                   "content", "T2 Engineering Station:                   ",
+                  <.i(
+                      <.b("The Hive"))),
+                <.td(^.width := "20",
+                  <.input(^.id := "checkbox",                             ^.display := "none", 
+                     ^.tpe := "checkbox")
+                    )
+                  )
+                )
+              ),
+          <.table(^.id := "Cybran", ^.classes :=                 "unit", ^.backgroundColor := "transparent             ", ^.cellspacing := "0", ^.width :=                  "100%",
+            <.tbody(
+              <.tr(
+                <.td(^.width := "20",
+                  <.img(^.classes := "icon", ^.src :=                    "http://www.faforever.com/faf/unitsDB/icons/small/cybran_icon_land2_engineer.png", ^.alt := "URL0208")),
+                <.td(^.id := "URL0208", ^.classes :=                   "content", "T2 Engineer"),
+                <.td(^.width := "20",
+                  <.input(^.id := "checkbox",                             ^.display := "none", 
+                     ^.tpe := "checkbox")
+                    )
+                  )
+                )
+              )
+            ),
+        <.td(^.id := "T2", ^.classes := "UEF", ^               ("valign") := "top",
+          <.table(^.id := "UEF", ^.classes :=                 "unit", ^.backgroundColor := "transparent             ", ^.cellspacing := "0", ^.width :=                  "100%",
+            <.tbody(
+              <.tr(
+                <.td(^.width := "20",
+                  <.img(^.classes := "icon", ^.src :=                    "http://www.faforever.com/faf/unitsDB/icons/small/uef_icon_structure1_engineer.png", ^.alt := "XEB0104")),
+                <.td(^.id := "XEB0104", ^.classes :=                   "content", "T2 Engineering Station:                   ",
+                  <.i(
+                      <.b("The Kennel"))),
+                <.td(^.width := "20",
+                  <.input(^.id := "checkbox",                             ^.display := "none", 
+                     ^.tpe := "checkbox")
+                    )
+                  )
+                )
+              ),
+        <.td(^.id := "T2", ^.classes := "UEF",                 ^("valign") := "top",
+          <.table(^.id := "UEF", ^.classes :=                 "unit", ^.backgroundColor := 
+            "transparent", ^.cellspacing := "0", 
+            ^.width := "100%",
+              <.tbody(
+              <.tr(
+                <.td(^.width := "20",
+                  <.img(^.classes := "icon", ^.src :=                    "http://www.faforever.com/faf/unitsDB/icons/small/uef_icon_land2_engineer.png", ^.alt := "UEL0208")),
+                    <.td(^.id := "UEL0208", ^.classes                       := "content", "T2 Engineer"),
+                <.td(^.width := "20",
+                  <.input(^.id := "checkbox",                             ^.display := "none", 
+                     ^.tpe := "checkbox")
+                    )
+                  )
+                )
+              )
+            ),
+          <.table(^.id := "UEF", ^.classes :=                 "unit", ^.backgroundColor := 
+            "transparent", ^.cellspacing := "0", 
+            ^.width := "100%",
+              <.tbody(
+              <.tr(
+                <.td(^.width := "20",
+                  <.img(^.classes := "icon", ^.src :=                    "http://www.faforever.com/faf/unitsDB/icons/small/uef_icon_land2_engineer.png", ^.alt := "XEL0209")),
+                    <.td(^.id := "XEL0209", ^.classes                       := "content", "T2 Field                              Engineer: "),
+                      <.i(
+                        <.b("Sparky")),
+                <.td(^.width := "20",
+                  <.input(^.id := "checkbox",                             ^.display := "none", 
+                     ^.tpe := "checkbox")
+                    )
+                  )
+                )
+              )
+            ),
+        <.td(^.id := "T2", ^.classes := "Seraphim", 
+          ^("valign") := "top",
+          <.table(^.id := "Seraphim", ^.classes :=             "unit", ^.backgroundColor := "transparent",           ^.cellspacing := "0", ^.width := "100%",
+            <.tbody(
+              <.tr(
+                <.td(^.width := "20",
+                  <.img(^.classes := "icon", ^.src :=                     "http://www.faforever.com/faf/unitsDB/icons/small/seraphim_icon_land2_engineer.png", ^.alt :="XSL0208")),
+                  <.td(^.id := "XSL0208", ^.classes                      := "content", "T2 Engineer: ",
+                    <.i(
+                      <.b("Iya"))),
+                <.td(^.width := "20",
+                  <.input(^.id := "checkbox",
+                    ^.display := "none",
+                    ^.tpe := "checkbox")
+                    )
+                  )
+                )  
+              )
+            )
+          ),
+      <.tr(
+        <.td(^.id := "T3", ^.classes := "Aeon", 
+        ^("valign") := "top",
+          <.table(^.id := "Aeon", ^.classes := "unit",             ^.backgroundColor := "transparent",                  ^.cellspacing := "0", ^.width :=                       "100%",
+            <.tbody(
+              <.tr(
+                <.td(^.width := "20",
+                  <.img(^.classes := "icon", ^.src :=                    "http://www.faforever.com/faf/unitsDB/icons/small/aeon_icon_land3_engineer.png", ^.alt := "UAL0309")),
+                <.td(^.id := "UAL0309", ^.classes :=                   "content", "T3 Engineer"),
+                <.td(^.width := "20",
+                  <.input(^.id := "checkbox",                             ^.display := "none", 
+                     ^.tpe := "checkbox")
+                    )
+                  )
+                )
+              )
+            ),
+        <.td(^.id := "T3", ^.classes := "Cybran", ^            ("valign") := "top",
+          <.table(^.id := "Cybran", ^.classes :=                 "unit", ^.backgroundColor := "transparent             ", ^.cellspacing := "0", ^.width :=                  "100%",
+            <.tbody(
+              <.tr(
+                <.td(^.width := "20",
+                  <.img(^.classes := "icon", ^.src :=                    "http://www.faforever.com/faf/unitsDB/icons/small/cybran_icon_land3_engineer.png", ^.alt := "URL0309")),
+                <.td(^.id := "URL0309", ^.classes :=                   "content", "T3 Engineer"),
+                <.td(^.width := "20",
+                  <.input(^.id := "checkbox",                             ^.display := "none", 
+                     ^.tpe := "checkbox")
+                    )
+                  )
+                )
+              )
+            ),
+        <.td(^.id := "T3", ^.classes := "UEF", ^               ("valign") := "top",
+          <.table(^.id := "UEF", ^.classes :=                 "unit", ^.backgroundColor := "transparent             ", ^.cellspacing := "0", ^.width :=                  "100%",
+            <.tbody(
+              <.tr(
+                <.td(^.width := "20",
+                  <.img(^.classes := "icon", ^.src :=                    "http://www.faforever.com/faf/unitsDB/icons/small/uef_icon_structure3_engineer.png", ^.alt := "XEB0204")),
+                <.td(^.id := "XEB0204", ^.classes :=                   "content", "T3 Engineering Station:                   ",
+                  <.i(
+                      <.b("The Kennel"))),
+                <.td(^.width := "20",
+                  <.input(^.id := "checkbox",                             ^.display := "none", 
+                     ^.tpe := "checkbox")
+                    )
+                  )
+                )
+              ),
+          <.table(^.id := "UEF", ^.classes :=                 "unit", ^.backgroundColor := 
+            "transparent", ^.cellspacing := "0", 
+            ^.width := "100%",
+              <.tbody(
+              <.tr(
+                <.td(^.width := "20",
+                  <.img(^.classes := "icon", ^.src :=                    "http://www.faforever.com/faf/unitsDB/icons/small/uef_icon_land3_engineer.png", ^.alt := "UEL0309")),
+                    <.td(^.id := "UEL0309", ^.classes                       := "content", "T3 Engineer"),
+                <.td(^.width := "20",
+                  <.input(^.id := "checkbox",                             ^.display := "none", 
+                     ^.tpe := "checkbox")
+                    )
+                  )
+                )
+              )
+            ),
+        <.td(^.id := "T3", ^.classes := "Seraphim", 
+          ^("valign") := "top",
+          <.table(^.id := "Seraphim", ^.classes :=             "unit", ^.backgroundColor := "transparent",           ^.cellspacing := "0", ^.width := "100%",
+            <.tbody(
+              <.tr(
+                <.td(^.width := "20",
+                  <.img(^.classes := "icon", ^.src :=                     "http://www.faforever.com/faf/unitsDB/icons/small/seraphim_icon_land3_engineer.png", ^.alt :="XSL0309")),
+                  <.td(^.id := "XSL0309", ^.classes                      := "content", "T3 Engineer: ",
+                    <.i(
+                      <.b("Iyathuum"))),
+                <.td(^.width := "20",
+                  <.input(^.id := "checkbox",
+                    ^.display := "none",
+                    ^.tpe := "checkbox")
+                    )
+                  )
+                )  
+              )
+            )
+          )
+    ))
+    
+    def render = {
+      WebPage(page, css)
+//    WebPage(
+      //<.div(
+        //<.h1("LARA Thai meeting"),
+        //<.p("Choose your menu. See you {enter date here} in {enter meeting place here} at {enter hour here}!"),
+//page), 
+//css))
+  }
+}
